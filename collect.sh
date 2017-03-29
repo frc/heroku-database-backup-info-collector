@@ -16,6 +16,6 @@ rm -rf /tmp/awscli-bundle/
 
 while IFS='=' read -r name value ; do
   if [[ $name == *'_DATABASE_URL'* || $name == *'JAWSDB_URL' ]]; then
-    $AWS_CLI_INSTALL_DIR/bin/aws sqs send-message --region $SQS_REGION --queue-url $SQS_QUEUE_URL --message-body "{\”type\”: \"database\", \"app\": \"$HEROKU_APP_NAME\", \"db\": \"$name\", \"url\": \"${!name}\"}"
+    $AWS_CLI_INSTALL_DIR/bin/aws sqs send-message --region $SQS_REGION --queue-url $SQS_QUEUE_URL --message-body "{\"type\": \"database\", \"app\": \"$HEROKU_APP_NAME\", \"db\": \"$name\", \"url\": \"${!name}\"}"
   fi
 done < <(env)
